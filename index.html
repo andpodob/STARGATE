@@ -1,0 +1,82 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+	<style>
+	body{
+	margin:0 auto;
+	overflow:hidden;
+	background:black;
+	}
+	#myCanvas{
+	position:absolute;
+	margin-left:50%;
+	transform:translateX(-50%);
+	}
+	#miniMap{
+	position:absolute;
+	margin-left:50%;
+	transform:translateX(-50%);
+        border:3px solid blue;
+	}
+	</style>
+
+</head>
+<body>
+    <canvas id="myCanvas" width="1440" height="810" style="border:1px solid #000000;"></canvas>
+    <canvas id="miniMap" width="666" height="160" style="border:1px solid #000000;"></canvas>
+    <script src="stargateatari2/code/RootTabele.js"></script>
+    <script src="stargateatari2/code/Control.js"></script>
+    <script src="stargateatari2/code/Cords.js"></script>
+    <script src="stargateatari2/code/Projectile.js"></script>
+    <script src="stargateatari2/code/Background.js"></script>
+    <script src="stargateatari2/code/Humanoid.js"></script>
+    <script src="stargateatari2/code/Pad.js"></script>
+    <script src="stargateatari2/code/Pod.js"></script>
+    <script src="stargateatari2/code/Swamer.js"></script>
+    <script src="stargateatari2/code/Lander.js"></script>
+    <script src="stargateatari2/code/Bomber.js"></script>
+    <script src="stargateatari2/code/Mine.js"></script>
+    <script src="stargateatari2/code/Waver.js"></script>
+    <script src="stargateatari2/Waves/Waves_JSON.js"></script>
+    <script src="stargateatari2/Alghoritmslib/Random.js"></script>
+    <script src="stargateatari2/Alghoritmslib/Rectangle.js"></script>
+    <script src="stargateatari2/code/Model.js"></script>
+    <script src="stargateatari2/code/VirtualBackground.js"></script>
+    <script src="stargateatari2/code/Main_Character.js"></script>
+    <script src="stargateatari2/Views/GameView.js"></script>
+    <script src="stargateatari2/Views/GameOverView.js"></script>
+    <script src="stargateatari2/Views/StartingView.js"></script>
+    <script src="stargateatari2/Views/WaveView.js"></script>
+    <script>
+        //wysokosc i szerokosc canvasa
+
+    //-------------------------------------------------------------------canvas
+    var canvas = document.getElementById("myCanvas");
+    var ctx = canvas.getContext("2d");
+    root_view = new StartingView();
+    //nasluch zdarzen
+    document.addEventListener("keydown", keyPress, false);
+    document.addEventListener("keyup", keyRelease, false);
+
+    function keyPress(event) {
+        Control.addEvent(event.keyCode);
+    }
+    function keyRelease(event) {
+        Control.removeEvent(event.keyCode);
+    }
+
+    //glowna petla gry
+    function game_loop() {
+        root_view.initView();
+        setInterval(function () {
+            Model.update();
+            root_view.updateView(ctx);
+        }, 20);
+    }
+    game_loop();
+    </script>
+
+</body>
+</html>
