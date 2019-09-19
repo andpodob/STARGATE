@@ -27,7 +27,8 @@ var StartingView = function () {
         for(i = 0; i < Control.eventList.length; i++){
             if(Control.eventList[i] == 13){
                 Control.eventList = new Array()
-                var wave = Waver.make_wave(JSON.parse(wave_1).wave_1);
+                console.log(JSON.parse(wave_1));
+                var wave = Waver.make_wave(JSON.parse(wave_1).waves[0]);
                 root_view = new WaveView(1, wave);
                 break;
             }

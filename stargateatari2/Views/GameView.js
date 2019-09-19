@@ -2,7 +2,7 @@
 
 var GameView =  function (wave) {
     this.alive_check = new Array(); //tablica sluzaca do sprawdzenia czy jeszcze zyje jakis obiket z danej fali
-    this.wave_counter = 1;
+    this.wave_counter = 0;
     this.wave = wave;
     this.initView = function () {
         console.log(this.wave)
@@ -74,12 +74,18 @@ var GameView =  function (wave) {
         }
         if(temp == 0){
             this.wave_counter++;
-            var wave = JSON.parse(wave_1);
-            for(var i = 0; i < wave.wave_1.length; i++){
-                wave.wave_1[i].amount *= Math.pow(2,this.wave_counter);
+            var wave = JSON.parse(wave_1)
+            console.log(wave.waves.length)
+            if(wave.waves.length > this.wave_counter){
+                wave = Waver.make_wave(wave.waves[this.wave_counter]);
+                console.log(wave)
+                root_view = new WaveView(this.wave_counter+1, wave);
             }
-            wave = Waver.make_wave(wave.wave_1);
-            root_view = new WaveView(this.wave_counter, wave);
+            else{ 
+                root_view = new StartingView()
+                root_view.initView();
+            }
+            
         }
 
         ctx.save();
